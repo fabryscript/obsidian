@@ -1,25 +1,22 @@
-import { Box, VStack, Text, Button } from "@chakra-ui/react";
+import { VStack, Text, Button } from "@chakra-ui/react";
 import { ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
 import "./action.css";
 
 interface Props {
   actionName: string;
   description: string;
-  to: string;
   icon: ReactElement;
+  action: () => void
 }
 
-function Action({ actionName, description, to, icon }: Props) {
-  const navigate = useNavigate();
-
+function Action({ actionName, description, action, icon }: Props) {
   return (
     <Button
       variant={"outline"}
       h="250px"
       w="250px"
       className="action"
-      onClick={() => navigate(to)}
+      onClick={action}
       borderWidth={"2px"}
       rounded="2xl"
       p="10%"

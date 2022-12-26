@@ -20,8 +20,6 @@ function Editor({ id }: Props) {
     getDocRef(id, user?.uid!) as DocumentReference<OBDocument>
   );
 
-  useEffect(() => console.log("update triggered"));
-
   const { register, handleSubmit } = useForm<{ title: string }>();
 
   const onSubmit = handleSubmit((data) =>

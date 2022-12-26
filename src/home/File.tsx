@@ -6,13 +6,24 @@ import {
   CardHeader,
   Heading,
   HStack,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEye, AiOutlineSave } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { OBDocument } from "../models";
 import { format } from "date-fns";
+import { deleteDocument } from "../logic/documentLogic";
+import { useContext } from "react";
+import { UserContext } from "../providers/AuthProvider";
 
 function File({
   authorizedUsers,
@@ -21,6 +32,7 @@ function File({
   title,
   lastModified,
 }: OBDocument) {
+  const user = useContext(UserContext);
   const navigate = useNavigate();
   return (
     <Card
@@ -48,7 +60,44 @@ function File({
             >
               Open
             </Button>
-            <Button leftIcon={<AiOutlineDelete />}>Delete</Button>
+            <Popover>
+              {({ onClose }) => (
+                <>
+                  <PopoverTrigger>
+                    <Button leftIcon={<AiOutlineDelete />}>Delete</Button>
+                  </PopoverTrigger>
+                  <PopoverContent bg={"#252525"}>
+                    <PopoverArrow bg={"#252525"} />
+                    <PopoverCloseButton />
+                    <PopoverHeader>Confirmation</PopoverHeader>
+                    <PopoverBody>
+                      Are you sure you want to delete this file? This action is
+                      irreversible.
+                    </PopoverBody>
+                    <PopoverFooter>
+                      <HStack justify={"center"}>
+                        <Button
+                          w="full"
+                          colorScheme={"red"}
+                          onClick={() => deleteDocument(user?.uid!, id)}
+                          leftIcon={<AiOutlineDelete />}
+                        >
+                          Delete
+                        </Button>
+                        <Button
+                          w="full"
+                          variant="outline"
+                          onClick={onClose}
+                          leftIcon={<AiOutlineSave />}
+                        >
+                          Keep
+                        </Button>
+                      </HStack>
+                    </PopoverFooter>
+                  </PopoverContent>
+                </>
+              )}
+            </Popover>
           </HStack>
         </VStack>
       </CardFooter>

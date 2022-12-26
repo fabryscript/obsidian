@@ -49,7 +49,7 @@ function Title({ onSubmit, title, register }: TitleProps) {
                     variant="ghost"
                     colorScheme={"green"}
                     w="full"
-                    onClick={() => onClose()}
+                    onClick={onClose}
                   >
                     Done
                   </Button>
