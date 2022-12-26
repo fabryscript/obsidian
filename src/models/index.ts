@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore"
+
 export interface OBUser {
   name: string,
   email: string
@@ -7,5 +9,7 @@ export interface OBUser {
 export interface OBDocument {
   id: string,
   content: string,
-  authorizedUsers: string[]
+  title: string,
+  authorizedUsers: string[],
+  lastModified: Timestamp
 }

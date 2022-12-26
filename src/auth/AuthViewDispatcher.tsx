@@ -1,6 +1,6 @@
 import { getRedirectResult } from 'firebase/auth'
 import { useEffect } from 'react'
-import HomeSelector from '../HomeSelector'
+import HomeSelector from '../home/HomeSelector'
 import { auth } from '../logic/firebase'
 import { createDbUser } from '../logic/auth';
 

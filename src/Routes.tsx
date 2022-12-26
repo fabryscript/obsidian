@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Editor from "./components/editor/Editor";
+import EditExistingFile from "./actions/EditExistingFile";
 import ViewDispatcher from "./ViewDispatcher";
 
 const router = createBrowserRouter([
@@ -9,7 +9,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/edit",
-    element: <Editor />
+    element: <EditExistingFile />
   }
 ])
 
